@@ -11,7 +11,7 @@ un[np.where(x>0.5)] = 1.0
 c = 1.0
 a = 1.0
 dt = dx*c/a
-t=0
+t=0.0
 t_max = 1.0
 tdump = 0.2
 dumpt = 0.0
@@ -31,6 +31,8 @@ A = build_matrix(c, M)
 def backward_euler(un):
     un = np.linalg.solve(A, un)
     return un
+
+
 
 def dump(t):
     pp.plot(x, un)
