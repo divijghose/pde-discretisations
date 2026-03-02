@@ -38,18 +38,14 @@ def build_matrix(c, M):
     centered scheme applied to the 1-D advection equation
     '''
     vals = np.zeros(M)
-    vals[0] = 1.0
-    vals[1] = c/2.0
-    vals[-1] = -c/2.0
-    A = circulant(vals)
-    stability_analysis(A)
+    vals[0] = 1.0 + c
+    vals[-1] = -1*c
+    A = circulant(vals)   
     return A
 
 def backward_euler(A, un):
     un = np.linalg.solve(A, un)
     return un
-
-
 
 def dump(x, un, t, dcount, c, results_dir='results'):
     # Create results directory with c subfolder if it doesn't exist
