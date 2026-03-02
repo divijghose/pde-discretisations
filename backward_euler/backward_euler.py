@@ -25,8 +25,7 @@ def stability_analysis(A):
     centered scheme is less than/equal to 1
     '''
     Ainv = np.linalg.inv(A)
-    eigAinv = np.linalg.eig(Ainv)
-    print("Eigenvalues of A^-1:", np.abs(eigAinv))
+    eigAinv = np.linalg.eigvals(Ainv)
     if max(np.abs(eigAinv)) > 1.0:
         print("Unstable")
     else:
