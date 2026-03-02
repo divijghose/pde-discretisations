@@ -66,7 +66,7 @@ python3 -m venv venv-firedrake
 export CC=mpicc CXX=mpicxx PETSC_DIR=/usr HDF5_MPI=ON HDF5_DIR=/usr
 echo 'setuptools<81' > constraints.txt
 export PIP_CONSTRAINT=constraints.txt
-pip install --no-binary=h5py --no-binary=mpi4py 'firedrake[check]'
+pip install --no-binary=h5py --no-binary=mpi4py vtk 'firedrake[check]'
 ```
 
 ## Verifying Firedrake
