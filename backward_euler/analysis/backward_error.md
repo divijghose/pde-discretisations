@@ -67,7 +67,7 @@ $$
 and therefore,
 
 $$
-u_t + au_x = \frac{\Delta t}{2](a^2 + a)u_{xx} + \mathcal{O}(\Delta t^2, \Delta x^2)
+u_t + au_x = \frac{\Delta t}{2}(a^2 + a)u_{xx} + \mathcal{O}(\Delta t^2, \Delta x^2)
 $$
 
 as a positive coefficient in front of the even derivative means that we have diffusion, we can see that this is always satisfied as the method is upwind for positive $a$. Therefore, the backward upwind Euler method is unconditionally stable.
