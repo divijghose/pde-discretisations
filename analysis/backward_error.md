@@ -38,3 +38,16 @@ $$
 u_{k-1}^{n+1} = u - \Delta x u_x + \frac{\Delta x^2}{2}u_{xx} + \mathcal{O}(\Delta x^3).
 $$
 
+Now, substituting in to the discretised equation, we find
+
+$$
+\frac{u - \left( u - \Delta t u_t + \frac{\Delta t^2}{2}u_{tt} + \mathcal{O}(\Delta t^3) \right)}{\Delta t} + a \frac{u - \left( u - \Delta x u_x + \frac{\Delta x^2}{2}u_{xx} + \mathcal{O}(\Delta x^3) \right)}{\Delta x} = 0.
+$$
+
+Simplifying, we have that 
+
+$$
+u_t + au_x = \frac{\Delta t}{2}u_{tt} + a\frac{\Delta t}{2}u_{xx} + \mathcal{O}(\Delta t^2, \Delta x^2)
+$$
+
+We now aim to eliminate the time derivative $u_{tt}$.
