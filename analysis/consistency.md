@@ -1,6 +1,7 @@
 ## 1D Advection Equation with Periodic B.C.s
 
 We consider the PDE
+
 $$
 \begin{cases}
 u_t + a u_x = 0, \\
@@ -10,9 +11,11 @@ u(L,t) = u(0,t).
 $$
 
 One can readily check that
+
 $$
 u(x,t) = \varphi(x - at)
 $$
+
 is a solution, provided $\varphi$ is sufficiently regular.
 
 ---
