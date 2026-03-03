@@ -6,8 +6,6 @@ $$
 u_t + au_x = 0
 $$
 
-We aim to conduct a Wilkinson's backward error analysis by observing for which $a$ and Courant number $c$, the Upwind Backward Euler method is stable.
-
 We are using a backward Euler, hence
 
 $$
@@ -47,7 +45,29 @@ $$
 Simplifying, we have that 
 
 $$
-u_t + au_x = \frac{\Delta t}{2}u_{tt} + a\frac{\Delta t}{2}u_{xx} + \mathcal{O}(\Delta t^2, \Delta x^2)
+u_t + au_x - \frac{\Delta t}{2}u_{tt} - a\frac{\Delta t}{2}u_{xx} = \mathcal{O}(\Delta t^2, \Delta x^2)
 $$
 
 We now aim to eliminate the time derivative $u_{tt}$.
+
+$$
+\partial_t : \ \ u_{tt} = -au_{xt} + \frac{\Delta t}{2}u_{ttt} + a\frac{\Delta t}{2}u_{xxt} + \mathcal{O}(\Delta t^2, \Delta x^2) 
+$$
+
+$$
+\partial_x : \ \ u_{tx} = -au_{xx} + \frac{\Delta t}{2}u_{ttx} + a\frac{\Delta t}{2}u_{xxx} + \mathcal{O}(\Delta t^2, \Delta x^2)
+$$
+
+so, we can find
+
+$$
+u_{tt} = a^2u_{xx} + \mathcal{O}(\Delta t^2, \Delta x^2)
+$$
+
+and therefore,
+
+$$
+u_t + au_x = \frac{\Delta t}{2](a^2 + a)u_{xx} + \mathcal{O}(\Delta t^2, \Delta x^2)
+$$
+
+as a positive coefficient in front of the even derivative means that we have diffusion, we can see that this is always satisfied as the method is upwind for positive $a$. Therefore, the backward upwind Euler method is unconditionally stable.
