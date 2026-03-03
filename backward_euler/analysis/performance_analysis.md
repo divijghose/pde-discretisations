@@ -74,6 +74,50 @@ $$
 \mathbf{u}^{n+1} = F^{-1} \Lambda^{-1} F \mathbf{u}^n.
 $$
 
+#### Complexity of the FFT (Master Method)
+
+The Cooley–Tukey algorithm computes the DFT of a length-$M$ sequence (assuming $M = 2^k$) by splitting it into its even- and odd-indexed entries. The DFT of length $M$ is
+
+$$
+X_j = \sum_{m=0}^{M-1} x_m \, \omega^{jm}, \quad \omega = e^{-2\pi i / M}.
+$$
+
+Separating even and odd indices $x_m = x_{2r}$ and $x_{2r+1}$:
+
+$$
+X_j = \underbrace{\sum_{r=0}^{M/2 - 1} x_{2r} \, \omega^{2rj}}_{\text{DFT of even entries}} + \omega^j \underbrace{\sum_{r=0}^{M/2 - 1} x_{2r+1} \, \omega^{2rj}}_{\text{DFT of odd entries}}.
+$$
+
+Each inner sum is itself a DFT of length $M/2$. The $M$ multiplications by the "twiddle factors" $\omega^j$ and the $M$ additions to combine the two half-transforms constitute $\mathcal{O}(M)$ work. This gives the recurrence
+
+$$
+T(M) = 2\,T\!\left(\frac{M}{2}\right) + \mathcal{O}(M).
+$$
+
+We apply the **Master Theorem**. For a recurrence of the form $T(M) = a\,T(M/b) + \mathcal{O}(M^d)$, the three cases are:
+
+$$
+T(M) = \begin{cases}
+\mathcal{O}(M^d \log M) & \text{if } a = b^d, \\
+\mathcal{O}(M^d) & \text{if } a < b^d, \\
+\mathcal{O}(M^{\log_b a}) & \text{if } a > b^d.
+\end{cases}
+$$
+
+Here we have $a = 2$, $b = 2$, and $d = 1$ (since the combine step is $\mathcal{O}(M^1)$). Checking:
+
+$$
+b^d = 2^1 = 2 = a,
+$$
+
+so we are in the first case ($a = b^d$), giving
+
+$$
+\boxed{T(M) = \mathcal{O}(M^d \log M) = \mathcal{O}(M \log M).}
+$$
+
+---
+
 The eigenvalues $\hat{a}_k = \text{FFT}(A_{:,0})$ are computed once. Each time step then requires:
 
 1. **FFT** of $\mathbf{u}^n$: $5M \log_2 M$ flops (Cooley–Tukey, $\sim 5$ flops per butterfly),
