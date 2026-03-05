@@ -6,8 +6,11 @@ def dudt(u, u_, dt):
 
 num_cells = 100 # Number of cells in each direction for the mesh
 checkpointing = False # Checkpointing flag
-t_max = 1.0
+t_max = 0.3
 dt = 1/num_cells
+
+k = 2 * pi
+omega = k**2
 
 # Create a unit square mesh
 mesh = PeriodicIntervalMesh(num_cells, 1.0)
@@ -18,7 +21,7 @@ V = VectorFunctionSpace(mesh, "CG", 1, dim=2)
 v = TestFunction(V)
 
 psi_0 = Function(V)
-psi_0.interpolate(as_vector([cos(2*pi*x[0]), sin(2*pi*x[0])]))
+psi_0.interpolate(as_vector([cos(k*x[0]), sin(k*x[0])]))
 psi_r0, psi_i0 = split(psi_0)
 
 psi = Function(V)
@@ -42,8 +45,9 @@ while t < t_max - dt/2:
     solve(F == 0, psi)
     psi_0.assign(psi)
 
+
     t_ufl.assign(t)
-    psi_true.interpolate(as_vector([cos(2 * pi * x[0] -  4 * pi**2 * t_ufl), sin(2 * pi * x[0] -  4 * pi**2 *  t_ufl)]))
+    psi_true.interpolate(as_vector([cos(k * x[0] -  omega * t_ufl), sin(k * x[0] -  omega *  t_ufl)]))
 
     err_l2 = norms.errornorm(psi, psi_true)
 
